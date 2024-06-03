@@ -8,8 +8,8 @@ const todos = ({ todos, toggleCompleted, deleteTodo }) => {
         <TodoItem
         key={todo.id}
         todo={todo}
-        toggleCompleted={toggleCompleted}
-        deleteTodo={deleteTodo}
+        // toggleCompleted={toggleCompleted}
+        // deleteTodo={deleteTodo}
         />
       ))}
     </div>

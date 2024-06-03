@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Todos from "./components/Todos";
+import TodoForm from "./components/TodoForm";
+
+export const TodoContext = createContext();
 
 function App() {
   const [todos, setTodos] = useState([
@@ -31,7 +34,7 @@ function App() {
         };
       }
       return todo;
-    })
+    });
 
     setTodos(updateTodos);
 
@@ -44,18 +47,31 @@ function App() {
     setTodos(updateTodos);
   };
 
+  const addTodo = (todoTitle) => {
+    console.log("This is addTodo Function is ");
+    if (todoTitle === "") {
+      return;
+    }
+
+    const newTodo = {
+      id: todos.length + 1,
+      title: todoTitle,
+      completed: false,
+    };
+
+    const updateTodos = todos.concat(newTodo);
+
+    setTodos(updateTodos);
+  };
+
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>My Todo List</h1>
-      {/* {todos.map((todo) => {
-        return <p key={todo.id}>{todo.title}</p>;
-      })} */}
-      <Todos
-      todos={todos}
-      toggleCompleted={toggleCompleted}
-      deleteTodo={deleteTodo}
-      />
-    </div>
+    <TodoContext.Provider value={{ toggleCompleted, deleteTodo, addTodo }}>
+      <div style={styles.container}>
+        <h1 style={styles.title}>My Todo List</h1>
+        <TodoForm />
+        <Todos todos={todos} />
+      </div>
+    </TodoContext.Provider>
   );
 }
 
