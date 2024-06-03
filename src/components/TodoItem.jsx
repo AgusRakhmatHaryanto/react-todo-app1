@@ -1,6 +1,11 @@
-import React from "react";
-
-const TodoItem = ({ todo, toggleCompleted, deleteTodo }) => {
+import React, { useContext } from "react";
+import { TodoContext } from "../App";
+const TodoItem = ({
+  todo,
+  // toggleCompleted, deleteTodo
+}) => {
+  // Peroleh "toggleCompleted" dan "deleteTodo" dari TodoContext
+  const { toggleCompleted, deleteTodo } = useContext(TodoContext)
   // Definisikan function getTodoTitleStyle di sini
   const getTodoTitleStyle = () => {
     if (todo.completed === true) {
@@ -23,10 +28,7 @@ const TodoItem = ({ todo, toggleCompleted, deleteTodo }) => {
       />
       <p style={getTodoTitleStyle()}>{todo.title}</p>
       {/* Tambahkan sebuah button di sini */}
-      <button
-      style={styles.button}
-      onClick={() => deleteTodo(todo.id)}
-      >
+      <button style={styles.button} onClick={() => deleteTodo(todo.id)}>
         x
       </button>
     </div>

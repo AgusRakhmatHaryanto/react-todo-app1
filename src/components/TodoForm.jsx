@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-const TodoForm = ({ addTodo }) => {
+import React, { useState, useContext } from "react";
+import { TodoContext } from "../App";
+
+const TodoForm = () => {
+  const { addTodo } = useContext(TodoContext);
   const [title, setTitle] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     addTodo(title);
-    setTitle('') // Reset title-nya
+    setTitle(""); // Reset title-nya
   };
   // Definisikan function "handleChangeTitle"
   const handleChangeTitle = (event) => {
